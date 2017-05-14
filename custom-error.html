@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Throw custom error</title>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <h1>Throw custom error</h1>
+  <script>
+    var err = new Error('My Custom Error!');
+    err.name = 'CustomError';
+    setInterval(function() {
+      throw err;
+    }, 3000)
+    console.log(undefinedVariable)
+  </script>
+</body>
+</html>

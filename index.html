@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Catch error in iframe</title>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <!-- This does not works -->
+  <script>
+    var handler = function() {
+      console.log('iframe-1');
+      console.log(arguments);
+    }
+  </script>
+  <iframe src="custom-error.html" onerror="handler">
+    <p>Your browser does not support iframes.</p>
+  </iframe>
+
+  <!-- This does not works -->
+  <iframe id="iframe-2" src="custom-error.html">
+    <p>Your browser does not support iframes.</p>
+  </iframe>
+  <script>
+    var iframe = document.querySelector('#iframe-2')
+    iframe.addEventListener('error', function() {
+      console.log('iframe-2');
+      console.log(arguments);
+    })
+  </script>
+
+  <!-- This does not works -->
+  <iframe id="iframe-3" src="custom-error.html">
+    <p>Your browser does not support iframes.</p>
+  </iframe>
+  <script>
+    var iframe = document.querySelector('#iframe-3')
+    iframe.onerror = function() {
+      console.log('iframe-3');
+      console.log(arguments);
+    };
+  </script>
+
+  <!-- This works -->
+  <iframe id="iframe-4" src="custom-error.html">
+    <p>Your browser does not support iframes.</p>
+  </iframe>
+  <script>
+    var iframe = document.querySelector('#iframe-4')
+    iframe.contentWindow.addEventListener('error', function() {
+      console.log('iframe-4');
+      console.log(arguments);
+    })
+  </script>
+
+  <!-- This works -->
+  <iframe id="iframe-5" src="custom-error.html">
+    <p>Your browser does not support iframes.</p>
+  </iframe>
+  <script>
+    var iframe = document.querySelector('#iframe-5')
+    iframe.contentWindow.onerror = function() {
+      console.log('iframe-5');
+      console.log(arguments);
+    };
+  </script>
+</body>
+</html>
